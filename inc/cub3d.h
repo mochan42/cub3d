@@ -25,38 +25,60 @@
 /* STRUCTURES */
 
 typedef struct	s_data {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void		*mlx;
+	void		*mlx_win;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }				t_data;
 
-typedef struct s_prg {
-	t_data  data;
-	char	*map_path;
-	int		row;
-	int		col;
-	char	**map;
-	int		nb_arg;
-	int		posX;
-	int		posY;
-}				t_prg;
+typedef struct s_camera {
+	char		initial_camera_direction;
+	double		planeX;
+	double		planeY;
+}				t_camera;
 
+typedef struct s_player {
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	int			player_angle;
+}				t_player;
+
+typedef struct s_prg {
+	t_data		data;
+	t_player	player;
+	t_camera	camera;
+	char		*map_path;
+	int			row;
+	int			col;
+	char		**map;
+	int			nb_arg;
+}				t_prg;
 
 /* ########################################################################## */
 /* CONSTANTS */
 
-
+# define SCR_WIDTH			1200
+# define SCR_HEIGHT			600
 
 /* ########################################################################## */
 /* FUNCTIONS */
 
+/* camera.c */
+void    init_camera_pos(t_prg *v);
+void	init_camera_dir(t_prg *v);
+
 /* map.c */
 int		count_nb_col(char *map_path);
 int		count_nb_row(char *map_path);
-char	**store_map(t_prg *v);
+void    init_player_pos(t_prg *v);
 void    print_map(t_prg *v);
+char	**store_map(t_prg *v);
+
+/* player.c */
+void    init_player_dir(t_prg *v);
 void    init_player_pos(t_prg *v);

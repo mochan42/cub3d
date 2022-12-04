@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:45:33 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/04 17:33:21 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/04 18:15:46 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,4 @@ void    print_map(t_prg *v)
         i++;
     }
     printf("\n");
-}
-
-void    init_player_pos(t_prg *v)
-{
-    int	i;
-	int	j;
-
-	j = 0;
-	while (j < v->row)
-	{
-		i = 0;
-		while (v->map[j][i] != '\0')
-		{
-			if (v->map[j][i] == 'N' || v->map[j][i] == 'S' || v->map[j][i] == 'W' || v->map[j][i] == 'E')
-            {
-				v->posX = i;
-                v->posY = j;
-            }
-			i++;
-		}
-		j++;
-	}
 }
