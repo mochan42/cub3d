@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/* INCLUDES */
+/* ########################################################################## */
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "./libft/inc/libft.h"
-# include "./gnl/inc/get_next_line.h"
-# include "./mlx/mlx.h"
+# include "../libft/inc/libft.h"
+# include "../gnl/inc/get_next_line.h"
+# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <math.h>
 #endif
+
+/* ########################################################################## */
+/* STRUCTURES */
 
 typedef struct	s_data {
 	void	*mlx;
@@ -31,5 +36,27 @@ typedef struct	s_data {
 
 typedef struct s_prg {
 	t_data  data;
-
+	char	*map_path;
+	int		row;
+	int		col;
+	char	**map;
+	int		nb_arg;
+	int		posX;
+	int		posY;
 }				t_prg;
+
+
+/* ########################################################################## */
+/* CONSTANTS */
+
+
+
+/* ########################################################################## */
+/* FUNCTIONS */
+
+/* map.c */
+int		count_nb_col(char *map_path);
+int		count_nb_row(char *map_path);
+char	**store_map(t_prg *v);
+void    print_map(t_prg *v);
+void    init_player_pos(t_prg *v);

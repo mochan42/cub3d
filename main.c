@@ -6,11 +6,22 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/03 21:44:41 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/04 17:33:10 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./cub3d.h"
+#include "./inc/cub3d.h"
+
+void    init_prg(t_prg *v)
+{
+    v->row = count_nb_row(v->map_path);
+    printf("nb of rows = %d\n", v->row);
+    v->map = store_map(v);
+    print_map(v);
+    init_player_pos(v);
+    printf("posX = %d\n", v->posX);
+    printf("posY = %d\n", v->posY);
+}
 
 int	ft_close_window(t_prg *v)
 {
@@ -27,7 +38,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int main(void)
+int main(int ac, char **av)
 {
     t_prg   *v;
     int x;
@@ -35,7 +46,12 @@ int main(void)
     
     x = 0;
     y = 0;
+    if (ac != 2)
+        exit(0);
     v = malloc(sizeof(t_prg) * 1);
+    v->map_path = ft_strdup(av[1]);
+    printf("path :%s\n", v->map_path);
+    init_prg(v);
     v->data.mlx = mlx_init();
     v->data.mlx_win = mlx_new_window(v->data.mlx, 800, 500, "CUBE 3 D");
     v->data.img = mlx_new_image(v->data.mlx, 800, 500);
