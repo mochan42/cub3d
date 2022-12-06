@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/04 21:58:29 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/06 17:25:14 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void    init_prg(t_prg *v)
     init_camera_pos(v);
     init_player_dir(v);
     init_camera_dir(v);
+    init_graphics(v);
 }
 
 int	ft_close_window(t_prg *v)
@@ -44,11 +45,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int main(int ac, char **av)
 {
     t_prg   *v;
-    int x;
-    int y;
+    // int x;
+    // int y;
     
-    x = 0;
-    y = 0;
+    // x = 0;
+    // y = 0;
     if (ac != 2)
         exit(0);
     v = malloc(sizeof(t_prg) * 1);
@@ -56,15 +57,11 @@ int main(int ac, char **av)
     printf("path :%s\n", v->map_path);
     init_prg(v);
     v->data.mlx = mlx_init();
-    v->data.mlx_win = mlx_new_window(v->data.mlx, SCR_WIDTH, SCR_HEIGHT, "CUBE 3 D");
+    v->data.mlx_win = mlx_new_window(v->data.mlx, SCR_WIDTH, SCR_HEIGHT, "cub3D");
     v->data.img = mlx_new_image(v->data.mlx, SCR_WIDTH, SCR_HEIGHT);
     v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bits_per_pixel, &v->data.line_length,
 								&v->data.endian);
-    while (x < SCR_WIDTH)
-    {
-        my_mlx_pixel_put(&v->data, x, 20, 0x00FF0000);
-        x++;
-    } 
+    raycasting(v);
     mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
     mlx_hook(v->data.mlx_win, 17, 0, ft_close_window, v);
     mlx_loop(v->data.mlx);
