@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:45:33 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/04 18:15:46 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/07 22:36:14 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	**store_map(t_prg *v)
 	while (row_index < v->row)
 	{
         v->map[row_index] = get_next_line(fd);
-        printf("ROW INDEX %d :%s\n", row_index, v->map[row_index]);
 		row_index++;
 	}
 	close(fd);

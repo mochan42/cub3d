@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/06 17:25:14 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/06 17:28:40 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int main(int ac, char **av)
 {
     t_prg   *v;
-    // int x;
-    // int y;
-    
-    // x = 0;
-    // y = 0;
+
     if (ac != 2)
         exit(0);
     v = malloc(sizeof(t_prg) * 1);

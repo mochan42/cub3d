@@ -66,7 +66,7 @@ typedef struct s_player {
 	double		posY;
 	double		dirX;
 	double		dirY;
-	int			player_angle;
+	double		player_angle;
 }				t_player;
 
 typedef struct s_prg {
@@ -84,9 +84,12 @@ typedef struct s_prg {
 /* ########################################################################## */
 /* CONSTANTS */
 
-# define SCR_WIDTH			1200
-# define SCR_HEIGHT			600
+# define SCR_WIDTH			300
+# define SCR_HEIGHT			300
 # define RGB_RED			0x00FF0000
+# define RGB_GREEN			0x0000FF00
+# define RGB_YELLOW			0x00FFFF00
+# define RGB_BLUE			0x000000FF
 
 /* ########################################################################## */
 /* FUNCTIONS */

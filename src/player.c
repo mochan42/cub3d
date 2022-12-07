@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:15:14 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/04 18:21:20 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/07 23:12:47 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void    init_player_pos(t_prg *v)
             {
 				v->player.posX = i;
                 v->player.posY = j;
+                break ;
             }
 			i++;
 		}
@@ -39,12 +40,12 @@ void    init_player_dir(t_prg *v)
     if (v->camera.initial_camera_direction == 'N')
     {
         v->player.dirX = 0;
-        v->player.dirY = 1;
+        v->player.dirY = -1;
     }
     if (v->camera.initial_camera_direction == 'S')
     {
         v->player.dirX = 0;
-        v->player.dirY = -1;
+        v->player.dirY = 1;
     }
     if (v->camera.initial_camera_direction == 'W')
     {
@@ -56,4 +57,6 @@ void    init_player_dir(t_prg *v)
         v->player.dirX = 1;
         v->player.dirY = 0;
     }
+    printf("dirX = %f\n", v->player.dirX);
+    printf("dirY = %f\n", v->player.dirY);
 }
