@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:15:14 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/07 23:12:47 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/09 16:17:39 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void    init_player_dir(t_prg *v)
         v->player.dirX = -1;
         v->player.dirY = 0;
     }
-    if (v->camera.initial_camera_direction == 'W')
+    if (v->camera.initial_camera_direction == 'E')
     {
         v->player.dirX = 1;
         v->player.dirY = 0;
