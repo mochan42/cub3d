@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/06 17:28:40 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/10 19:43:06 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    init_prg(t_prg *v)
     printf("nb of rows = %d\n", v->row);
     v->map = store_map(v);
     print_map(v);
-    init_player_pos(v);
+    find_player_pos(v);
     printf("posX = %f\n", v->player.posX);
     printf("posY = %f\n", v->player.posY);
     init_camera_pos(v);
@@ -29,8 +29,9 @@ void    init_prg(t_prg *v)
 
 int	ft_close_window(t_prg *v)
 {
-	mlx_destroy_window(v->data.mlx, v->data.mlx_win);
 	printf("exit cub3D\n");
+    mlx_destroy_window(v->data.mlx, v->data.mlx_win);
+	printf("HERE\n");
 	exit (0);
 }
 
@@ -57,8 +58,13 @@ int main(int ac, char **av)
     v->data.img = mlx_new_image(v->data.mlx, SCR_WIDTH, SCR_HEIGHT);
     v->data.addr = mlx_get_data_addr(v->data.img, &v->data.bits_per_pixel, &v->data.line_length,
 								&v->data.endian);
+    // retrieve player position in map before raycasting
     raycasting(v);
     mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
-    mlx_hook(v->data.mlx_win, 17, 0, ft_close_window, v);
+    mlx_hook(v->data.mlx_win, 2, 1L << 0, key_hook, &v);
+    printf("nb of rows (AGAIN)= %d\n", v->row);
+    // mlx_key_hook(v->data.mlx_win, key_hook, &v);
+    mlx_hook(v->data.mlx_win, 17, 0, ft_close_window, &v);
     mlx_loop(v->data.mlx);
+    return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:15:14 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/09 16:17:39 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/10 19:01:52 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void    init_player_pos(t_prg *v)
+void    find_player_pos(t_prg *v)
 {
     int	i;
 	int	j;
