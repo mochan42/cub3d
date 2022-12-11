@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 11:17:44 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 17:30:24 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,32 @@ void    init_graphics(t_prg *v)
     v->graphics.side = 0;
 }
 
+void    fill_background(t_prg *v)
+{
+    int row;
+    int col;
+    int background_color;
+    
+    row = 0;
+    background_color = 0x0000FFFF;
+    while (row < SCR_HEIGHT)
+    {
+        col = 0;
+        while(col < SCR_WIDTH)
+        {
+            my_mlx_pixel_put(&v->data, col, row, background_color);
+            col++;
+        }
+        row++;
+    }
+}
+
+
 void    raycasting(t_prg *v)
 {
     int x;
+
+    fill_background(v);
     x = 0;
     while (x < SCR_WIDTH)
     {    
@@ -70,6 +93,7 @@ void    raycasting(t_prg *v)
         int hit_counter;
             
         hit_counter = 0;
+        v->graphics.hit = 0;
         while (v->graphics.hit == 0)
         {
 
@@ -148,10 +172,7 @@ void    raycasting(t_prg *v)
             my_mlx_pixel_put(&v->data, x, counter, v->graphics.color);
             counter++;
         }
-        x++;
-        mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
-        v->graphics.hit = 0;
+        x++;  
     }
-
-    
+     mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
 }

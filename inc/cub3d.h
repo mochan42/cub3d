@@ -122,13 +122,17 @@ int		ft_close_window(t_prg *v);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /* moves.c */
-void	 move_forward(t_prg *v);
+void	move_backwards(t_prg *v);
+void	move_forward(t_prg *v);
+void    move_left(t_prg *v);
+void    move_right(t_prg *v);
 
 /* player.c */
 void    init_player_dir(t_prg *v);
 void    find_player_pos(t_prg *v);
 
 /* raycasting.c */
+void    fill_background(t_prg *v);
 void    init_graphics(t_prg *v);
 void    raycasting(t_prg *v);
 

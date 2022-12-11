@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 11:17:27 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 11:28:15 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int main(int ac, char **av)
 								&v->data.endian);
     raycasting(v);
     mlx_hook(v->data.mlx_win, 2, 1L << 0, key_hook, v);
-    // mlx_key_hook(v->data.mlx_win, key_hook, &v);
     mlx_hook(v->data.mlx_win, 17, 0, ft_close_window, v);
     mlx_loop(v->data.mlx);
     return (0);
