@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:32:14 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 19:19:05 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 20:48:49 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,9 @@ int	key_hook(int keycode, t_prg *v)
 	if (keycode == KEY_RIGHT)
         move_right(v);
     if (keycode == KEY_ROT_LEFT)
-	{
-        printf("rotate left\n");
-    }
+        rotate_left(v);
     if (keycode == KEY_ROT_RIGHT)
-	{
-        printf("rotate right\n");
-    }
+        rotate_right(v);
 	if (keycode == KEY_ESC)
 	{
         ft_close_window(v);

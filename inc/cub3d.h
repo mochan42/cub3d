@@ -38,6 +38,8 @@ typedef struct s_camera {
 	char		initial_camera_direction;
 	double		planeX;
 	double		planeY;
+	double		oldPlaneX;
+	double		oldPlaneY;
 }				t_camera;
 
 typedef struct s_graphics {
@@ -66,6 +68,8 @@ typedef struct s_player {
 	double		posY;
 	double		dirX;
 	double		dirY;
+	double		oldDirX;
+	double		oldDirY;
 	double		player_angle;
 }				t_player;
 
@@ -98,7 +102,7 @@ typedef struct s_prg {
 # define KEY_ROT_LEFT		123
 # define KEY_ROT_RIGHT		124
 # define MOVE_SPEED			0.6
-# define ROT_SPEED			0.5
+# define ROT_SPEED			0.3
 
 /* ########################################################################## */
 /* FUNCTIONS */
@@ -126,6 +130,8 @@ void	move_backwards(t_prg *v);
 void	move_forward(t_prg *v);
 void    move_left(t_prg *v);
 void    move_right(t_prg *v);
+void	rotate_left(t_prg *v);
+void	rotate_right(t_prg *v);
 
 /* player.c */
 void    init_player_dir(t_prg *v);

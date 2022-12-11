@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 17:30:24 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 20:32:15 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,5 +174,5 @@ void    raycasting(t_prg *v)
         }
         x++;  
     }
-     mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
+    mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
 }
