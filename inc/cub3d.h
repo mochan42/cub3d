@@ -97,7 +97,7 @@ typedef struct s_prg {
 # define KEY_RIGHT			2
 # define KEY_ROT_LEFT		123
 # define KEY_ROT_RIGHT		124
-# define MOVE_SPEED			0.3
+# define MOVE_SPEED			0.6
 # define ROT_SPEED			0.5
 
 /* ########################################################################## */

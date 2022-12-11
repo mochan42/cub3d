@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 15:32:14 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/10 19:48:36 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 11:15:48 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@ int	key_hook(int keycode, t_prg *v)
 {
     
     if (keycode == KEY_UP)
-    {
-        printf("v->row = %d\n", v->row);
-        printf("posX = %f\n", v->player.posX);
-        printf("posY = %f\n", v->player.posY);
-        // move_forward(v);
-    }
+        move_forward(v);
 	if (keycode == KEY_LEFT)
 	{
         printf("move left\n");
@@ -46,5 +41,6 @@ int	key_hook(int keycode, t_prg *v)
 	{
         ft_close_window(v);
     }
+    raycasting(v);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/10 16:49:11 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 11:17:44 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void    raycasting(t_prg *v)
         // printf("mapY @Init = %d, \n", v->graphics.mapY);
         v->graphics.deltaDistX = (v->graphics.rayDirX == 0) ? 1e30 : fabs(1/v->graphics.rayDirX);
         v->graphics.deltaDistY = (v->graphics.rayDirY == 0) ? 1e30 : fabs(1/v->graphics.rayDirY);
-        
-
         
         if (v->graphics.rayDirX < 0)
         {
@@ -151,6 +149,7 @@ void    raycasting(t_prg *v)
             counter++;
         }
         x++;
+        mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
         v->graphics.hit = 0;
     }
 

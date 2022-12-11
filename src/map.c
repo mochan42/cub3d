@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:45:33 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/10 19:38:59 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/11 10:00:11 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ char	**store_map(t_prg *v)
         v->map[row_index] = ft_strdup(get_next_line(fd));
 		row_index++;
 	}
-	printf("ROW : %d\n", v->row);
 	close(fd);
 	return (v->map);
 }
