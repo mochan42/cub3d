@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 20:32:15 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/16 15:10:27 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void    raycasting(t_prg *v)
             // printf("hit_counter =%d / v->graphics.mapY =%d\n", hit_counter, v->graphics.mapY);
             
             //jump to next map square, either in x-direction, or in y-direction
+            // side = 0 means NS wall, side = 1 meanse EW wall
             if (v->graphics.sideDistX < v->graphics.sideDistY)
             {
                 v->graphics.sideDistX += v->graphics.deltaDistX;
