@@ -34,7 +34,7 @@ END_COLOR			:= \033[0;39m
 # SOURCES
 
 SRC_FILES			:=	map.c camera.c player.c raycasting.c hooks.c \
-						utils_1.c moves.c
+						utils_1.c moves.c textures.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
 SRC					:= $(addprefix $(SRC_DIR), $(SRC_FILES))

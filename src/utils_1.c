@@ -6,9 +6,13 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:31:50 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/10 16:50:00 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/17 18:00:20 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+void    free_cub3d(t_prg *v)
+{
+    (void)v;
+}

@@ -24,15 +24,27 @@
 /* ########################################################################## */
 /* STRUCTURES */
 
-typedef struct	s_data {
-	void		*mlx;
-	void		*mlx_win;
+typedef struct	s_img {
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
-}				t_data;
+	int			height;
+	int			width;
+}				t_img;
+
+typedef	struct s_textures {
+	t_img		no;
+	t_img		so;
+	t_img		ea;
+	t_img		we;
+	char		*path_no;
+	char		*path_so;
+	char		*path_ea;
+	char		*path_we;
+	char		toApply;
+}				t_textures;
 
 typedef struct s_camera {
 	char		initial_camera_direction;
@@ -61,6 +73,11 @@ typedef struct s_graphics {
 	int			drawStart;
 	int			drawEnd;
 	double		color;
+	int			tex_x;
+	double		tex_y;
+	double		tex_y_step;
+	double		tex_pos;
+	double		wallX;
 }				t_graphics;
 
 typedef struct s_player {
@@ -74,7 +91,10 @@ typedef struct s_player {
 }				t_player;
 
 typedef struct s_prg {
-	t_data		data;
+	void		*mlx;
+	void		*mlx_win;
+	t_img		img;
+	t_textures	tex;
 	t_player	player;
 	t_camera	camera;
 	t_graphics	graphics;
@@ -108,8 +128,8 @@ typedef struct s_prg {
 /* FUNCTIONS */
 
 /* camera.c */
-void    init_camera_pos(t_prg *v);
 void	init_camera_dir(t_prg *v);
+void    init_camera_pos(t_prg *v);
 
 /* hooks.c */
 int		key_hook(int keycode, t_prg *v);
@@ -123,7 +143,7 @@ char	**store_map(t_prg *v);
 
 /* main.c */
 int		ft_close_window(t_prg *v);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 /* moves.c */
 void	move_backwards(t_prg *v);
@@ -134,13 +154,23 @@ void	rotate_left(t_prg *v);
 void	rotate_right(t_prg *v);
 
 /* player.c */
-void    init_player_dir(t_prg *v);
 void    find_player_pos(t_prg *v);
+void    init_player_dir(t_prg *v);
 
 /* raycasting.c */
 void    fill_background(t_prg *v);
 void    init_graphics(t_prg *v);
 void    raycasting(t_prg *v);
 
+/* textures.c*/
+void    create_texture_images(t_prg *v);
+void    load_texture_paths(t_prg *v);
+void    init_textures(t_prg *v);
+void    find_texture_coord(t_prg *v, t_img *wall_tex);
+t_img   *get_wall_tex(t_textures *tex);
+void    apply_wall_tex(t_prg *v, t_graphics *graphics);
+void    add_texture(t_prg *v, t_img *wall_tex, int x);
+
 /* utils_1.c */
+void    free_cub3d(t_prg *v);
 

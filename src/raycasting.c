@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/16 15:10:27 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/17 20:21:02 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void    init_graphics(t_prg *v)
     v->graphics.deltaDistY = 0;
     v->graphics.hit = 0;
     v->graphics.side = 0;
+    v->graphics.wallX = 0;
+    v->tex.toApply = 'N';
 }
 
 void    fill_background(t_prg *v)
@@ -34,7 +36,7 @@ void    fill_background(t_prg *v)
         col = 0;
         while(col < SCR_WIDTH)
         {
-            my_mlx_pixel_put(&v->data, col, row, background_color);
+            my_mlx_pixel_put(&v->img, col, row, background_color);
             col++;
         }
         row++;
@@ -48,7 +50,7 @@ void    raycasting(t_prg *v)
 
     fill_background(v);
     x = 0;
-    while (x < SCR_WIDTH)
+    while (x < 1)
     {    
         // printf("--⬇️ -- x = %d --------------------------------------------------------\n", x);
         v->graphics.cameraX = 2 * x / (double)SCR_WIDTH - 1;
@@ -154,26 +156,32 @@ void    raycasting(t_prg *v)
         // v->graphics.drawStart,
         // v->graphics.drawEnd);
 
-        if (v->map[v->graphics.mapY][v->graphics.mapX] == '1')
-        {
-            if (v->graphics.side == 1 && v->graphics.rayDirY < 0)
-                v->graphics.color = RGB_RED;
-            if (v->graphics.side == 1 && v->graphics.rayDirY > 0)
-                v->graphics.color = RGB_YELLOW;
-            if (v->graphics.side == 0 && v->graphics.rayDirX < 0)
-                v->graphics.color = RGB_GREEN;
-            if (v->graphics.side == 0 && v->graphics.rayDirX > 0)
-                v->graphics.color = RGB_BLUE;
-        }
+
+        // if (v->map[v->graphics.mapY][v->graphics.mapX] == '1')
+        // {
+        //     if (v->graphics.side == 1 && v->graphics.rayDirY < 0)
+        //         v->graphics.color = RGB_RED;
+        //     if (v->graphics.side == 1 && v->graphics.rayDirY > 0)
+        //         v->graphics.color = RGB_YELLOW;
+        //     if (v->graphics.side == 0 && v->graphics.rayDirX < 0)
+        //         v->graphics.color = RGB_GREEN;
+        //     if (v->graphics.side == 0 && v->graphics.rayDirX > 0)
+        //         v->graphics.color = RGB_BLUE;
+        // }
         
-        int counter;
-        counter = v->graphics.drawStart;
-        while (counter < v->graphics.drawEnd)
-        {
-            my_mlx_pixel_put(&v->data, x, counter, v->graphics.color);
-            counter++;
-        }
+        init_textures(v);
+
+        apply_wall_tex(v, &v->graphics);
+        add_texture(v, get_wall_tex(&v->tex), x);
+        
+        // int counter;
+        // counter = v->graphics.drawStart;
+        // while (counter < v->graphics.drawEnd)
+        // {
+        //     my_mlx_pixel_put(&v->img, x, counter, v->graphics.color);
+        //     counter++;
+        // }
         x++;  
     }
-    mlx_put_image_to_window(v->data.mlx, v->data.mlx_win,v->data.img, 0, 0);
+    mlx_put_image_to_window(v->mlx, v->mlx_win,v->img.img, 0, 0);
 }
