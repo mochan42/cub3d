@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:56:11 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 20:52:09 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/27 22:58:41 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,35 @@
 
 void    move_forward(t_prg *v)
 {
-	printf("move forward\n");
-	printf("\tposX (before)= %f\n", v->player.posX);
-    printf("\tposY (before)= %f\n", v->player.posY);
+	// printf("move forward\n");
+	// printf("\tposX (before)= %f\n", v->player.posX);
+    // printf("\tposY (before)= %f\n", v->player.posY);
     if(v->map[(int)v->player.posY][(int)(v->player.posX + v->player.dirX * (double)MOVE_SPEED)] != '1')
 		v->player.posX += v->player.dirX * (double)MOVE_SPEED;
     if(v->map[(int)(v->player.posY + v->player.dirY * (double)MOVE_SPEED)][(int)(v->player.posX)] != '1')
 		v->player.posY += v->player.dirY * (double)MOVE_SPEED;
-	printf("\tposX (after)= %f\n", v->player.posX);
-    printf("\tposY (after)= %f\n", v->player.posY);
+	// printf("\tposX (after)= %f\n", v->player.posX);
+    // printf("\tposY (after)= %f\n", v->player.posY);
 }
 
 void    move_backwards(t_prg *v)
 {
-	printf("move backwards\n");
-	printf("\tposX (before)= %f\n", v->player.posX);
-    printf("\tposY (before)= %f\n", v->player.posY);
+	// printf("move backwards\n");
+	// printf("\tposX (before)= %f\n", v->player.posX);
+    // printf("\tposY (before)= %f\n", v->player.posY);
     if(v->map[(int)v->player.posY][(int)(v->player.posX - v->player.dirX * (double)MOVE_SPEED)] != '1')
 		v->player.posX -= v->player.dirX * (double)MOVE_SPEED;
     if(v->map[(int)(v->player.posY - v->player.dirY * (double)MOVE_SPEED)][(int)(v->player.posX)] != '1')
 		v->player.posY -= v->player.dirY * (double)MOVE_SPEED;
-	printf("\tposX (after)= %f\n", v->player.posX);
-    printf("\tposY (after)= %f\n", v->player.posY);
+	// printf("\tposX (after)= %f\n", v->player.posX);
+    // printf("\tposY (after)= %f\n", v->player.posY);
 }
 
 void    move_left(t_prg *v)
 {
-	printf("move left\n");
-	printf("\tposX (before)= %f\n", v->player.posX);
-    printf("\tposY (before)= %f\n", v->player.posY);
+	// printf("move left\n");
+	// printf("\tposX (before)= %f\n", v->player.posX);
+    // printf("\tposY (before)= %f\n", v->player.posY);
     if(v->player.dirX >= 0 && v->player.dirY < 0 && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
@@ -67,15 +67,15 @@ void    move_left(t_prg *v)
 		v->player.posX += fabs(v->player.dirY) * (double)MOVE_SPEED;
 		v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
 	}
-	printf("\tposX (after)= %f\n", v->player.posX);
-    printf("\tposY (after)= %f\n", v->player.posY);
+	// printf("\tposX (after)= %f\n", v->player.posX);
+    // printf("\tposY (after)= %f\n", v->player.posY);
 }
 
 void    move_right(t_prg *v)
 {
-	printf("move right\n");
-	printf("\tposX (before)= %f\n", v->player.posX);
-    printf("\tposY (before)= %f\n", v->player.posY);
+	// printf("move right\n");
+	// printf("\tposX (before)= %f\n", v->player.posX);
+    // printf("\tposY (before)= %f\n", v->player.posY);
     if(v->player.dirX >= 0 && v->player.dirY < 0 && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
@@ -100,8 +100,8 @@ void    move_right(t_prg *v)
 		v->player.posX -= fabs(v->player.dirY) * (double)MOVE_SPEED;
 		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
 	}
-	printf("\tposX (after)= %f\n", v->player.posX);
-    printf("\tposY (after)= %f\n", v->player.posY);
+	// printf("\tposX (after)= %f\n", v->player.posX);
+    // printf("\tposY (after)= %f\n", v->player.posY);
 }
 
 void	rotate_left(t_prg *v)

@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:59:54 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/17 21:16:57 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/27 22:57:40 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void    load_texture_paths(t_prg *v)
 {
-    v->tex.path_no = "../textures/brick_brown_64x64.xpm";
-    v->tex.path_so = "../textures/brick_green_64x64.xpm";
-    v->tex.path_ea = "../textures/stones_64x64.xpm";
-    v->tex.path_we = "../textures/wooden_box_64x64.xpm";
+    v->tex.path_no = "./textures/brick_brown_64x64.xpm";
+    v->tex.path_so = "./textures/brick_green_64x64.xpm";
+    v->tex.path_ea = "./textures/stones_64x64.xpm";
+    v->tex.path_we = "./textures/wooden_box_64x64.xpm";
 }
 
 // add error management in case of failure
@@ -113,7 +113,7 @@ void    add_texture(t_prg *v, t_img *wall_tex, int x)
 
         color = *(int *)tex_addr;
         my_mlx_pixel_put(&(v->img), x, y, color);
-        tex_graphics->tex_y += tex_graphics->tex_pos; 
+        tex_graphics->tex_y += tex_graphics->tex_y_step; 
         y++;
     }
 }

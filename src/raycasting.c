@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/17 20:21:02 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/27 21:42:22 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    raycasting(t_prg *v)
 
     fill_background(v);
     x = 0;
-    while (x < 1)
+    while (x < SCR_WIDTH)
     {    
         // printf("--⬇️ -- x = %d --------------------------------------------------------\n", x);
         v->graphics.cameraX = 2 * x / (double)SCR_WIDTH - 1;

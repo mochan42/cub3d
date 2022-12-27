@@ -76,7 +76,7 @@ typedef struct s_graphics {
 	int			tex_x;
 	double		tex_y;
 	double		tex_y_step;
-	double		tex_pos;
+	// double		tex_pos;
 	double		wallX;
 }				t_graphics;
 
