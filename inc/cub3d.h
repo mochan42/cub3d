@@ -104,7 +104,8 @@ typedef struct s_prg {
 	int			row;
 	int			col;
 	char		**map;
-	int			nb_arg;	
+	int			nb_arg;
+	int			map_i;
 }				t_prg;
 
 /* ########################################################################## */
@@ -123,7 +124,7 @@ typedef struct s_prg {
 # define KEY_RIGHT			2
 # define KEY_ROT_LEFT		123
 # define KEY_ROT_RIGHT		124
-# define MOVE_SPEED			0.6
+# define MOVE_SPEED			0.4
 # define ROT_SPEED			0.3
 
 /* ########################################################################## */
@@ -175,4 +176,8 @@ void    add_texture(t_prg *v, t_img *wall_tex, int x);
 
 /* utils_1.c */
 void    free_cub3d(t_prg *v);
+void    skipe_empty_line(t_prg *v);
+void    init_card_pt(int card_pt[4]);
+void    check_direction(t_prg *v, int *validator);
+void    parsing(t_prg *v, int *validator);
 

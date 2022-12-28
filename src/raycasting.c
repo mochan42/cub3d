@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/28 13:33:03 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/28 22:15:27 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void    raycasting(t_prg *v)
     fill_background(v);
     init_textures(v);
     x = 0;
+
     while (x < SCR_WIDTH)
     {    
         // printf("--⬇️ -- x = %d --------------------------------------------------------\n", x);
@@ -149,8 +150,12 @@ void    raycasting(t_prg *v)
             // printf("sideDistY =%f, deltaDistY =%f, \n", v->graphics.sideDistY, v->graphics.deltaDistY);
             v->graphics.perpWallDist = (v->graphics.sideDistY - v->graphics.deltaDistY);
         }
-
-        v->graphics.lineHeight = (int)(SCR_HEIGHT / v->graphics.perpWallDist);
+        if (v->graphics.perpWallDist == 0)
+           v->graphics.lineHeight = (int)SCR_HEIGHT;
+        else
+            v->graphics.lineHeight = (int)(SCR_HEIGHT / v->graphics.perpWallDist);
+        // printf("v->graphics.perpWallDist =%f\n", v->graphics.perpWallDist);
+        // printf("v->graphics.lineHeight =%d\n", v->graphics.lineHeight);
         
         v->graphics.drawStart = v->graphics.lineHeight * (-1) / 2 + SCR_HEIGHT / 2;
         if(v->graphics.drawStart < 0)
@@ -179,7 +184,6 @@ void    raycasting(t_prg *v)
         //     if (v->graphics.side == 0 && v->graphics.rayDirX > 0)
         //         v->graphics.color = RGB_BLUE;
         // }
-        
 
         apply_wall_tex(v, &v->graphics);
         add_texture(v, get_wall_tex(&v->tex), x);

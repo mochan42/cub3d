@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/17 17:54:11 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/28 22:04:31 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void    init_prg(t_prg *v)
     v->row = count_nb_row(v->map_path);
     printf("nb of rows = %d\n", v->row);
     v->map = store_map(v);
+    v->map_i = 0;
+}
+
+void    update_prog(t_prg *v) 
+{
     print_map(v);
     find_player_pos(v);
     printf("posX = %f\n", v->player.posX);
@@ -46,13 +51,44 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 int main(int ac, char **av)
 {
     t_prg   *v;
+    int     validator;
+    char    **tmp;
+    int     i;
 
     if (ac != 2)
         exit(0);
     v = malloc(sizeof(t_prg) * 1);
     v->map_path = ft_strdup(av[1]);
-    printf("path :%s\n", v->map_path);
     init_prg(v);
+    parsing(v, &validator);
+    if (validator == 1)
+        return (0);
+    //skipe_empty_line(v);
+    //v->map_i += 2;
+    skipe_empty_line(v);
+    i = 0;
+    tmp = malloc(sizeof(char *) * (v->row - v->map_i + 1));
+	while (v->map_i < v->row)
+	{
+        tmp[i] = ft_strdup(v->map[v->map_i]);
+        printf("%s", tmp[i]);
+        i++;
+        v->map_i++;
+	}
+    tmp[i] = NULL;
+    //free previous map
+    printf("V-row : %d", i);
+    v->map = tmp;
+    v->row = i;
+    update_prog(v);
+    i = 0;
+    printf("\n\n");
+    while(i < v->row)
+    {
+        printf("%s", v->map[i]);
+        i++;
+    }
+    printf("path :%s\n", v->map_path);
     v->mlx = mlx_init();
     v->mlx_win = mlx_new_window(v->mlx, SCR_WIDTH, SCR_HEIGHT, "cub3D");
     v->img.img = mlx_new_image(v->mlx, SCR_WIDTH, SCR_HEIGHT);
