@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/27 21:42:22 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/28 12:26:22 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void    raycasting(t_prg *v)
     int x;
 
     fill_background(v);
+    init_textures(v);
     x = 0;
     while (x < SCR_WIDTH)
     {    
@@ -169,7 +170,6 @@ void    raycasting(t_prg *v)
         //         v->graphics.color = RGB_BLUE;
         // }
         
-        init_textures(v);
 
         apply_wall_tex(v, &v->graphics);
         add_texture(v, get_wall_tex(&v->tex), x);
