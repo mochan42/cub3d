@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:56:11 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/27 22:58:41 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/28 16:27:47 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void    move_left(t_prg *v)
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
 		v->player.posX -= fabs(v->player.dirY) * (double)MOVE_SPEED;
-		v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
+		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		// v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
 	}
 	if(v->player.dirX >= 0 && v->player.dirY >= 0 && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
@@ -59,7 +60,7 @@ void    move_left(t_prg *v)
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
 		v->player.posX -= fabs(v->player.dirY) * (double)MOVE_SPEED;
-		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
 	}	
     if(v->player.dirX < 0 && v->player.dirY >= 0 && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
@@ -80,7 +81,7 @@ void    move_right(t_prg *v)
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
 		v->player.posX += fabs(v->player.dirY) * (double)MOVE_SPEED;
-		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
 	}
 	if(v->player.dirX >= 0 && v->player.dirY >= 0 && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
@@ -92,7 +93,7 @@ void    move_right(t_prg *v)
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
 		v->player.posX += fabs(v->player.dirY) * (double)MOVE_SPEED;
-		v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
+		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
 	}	
     if(v->player.dirX < 0 && v->player.dirY >= 0 && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
