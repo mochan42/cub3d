@@ -44,6 +44,8 @@ typedef	struct s_textures {
 	char		*path_ea;
 	char		*path_we;
 	char		toApply;
+	int			ceiling_color;
+	int			floor_color;
 }				t_textures;
 
 typedef struct s_camera {

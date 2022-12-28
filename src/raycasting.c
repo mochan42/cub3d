@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/28 12:26:22 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/28 13:33:03 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,26 @@ void    fill_background(t_prg *v)
 {
     int row;
     int col;
-    int background_color;
     
+    v->tex.ceiling_color = 0x0000FFFF;
+    v->tex.floor_color = 0x00C0C0C0;
     row = 0;
-    background_color = 0x0000FFFF;
-    while (row < SCR_HEIGHT)
+    while (row < SCR_HEIGHT / 2)
     {
         col = 0;
         while(col < SCR_WIDTH)
         {
-            my_mlx_pixel_put(&v->img, col, row, background_color);
+            my_mlx_pixel_put(&v->img, col, row, v->tex.ceiling_color);
+            col++;
+        }
+        row++;
+    }
+     while (row < SCR_HEIGHT)
+    {
+        col = 0;
+        while(col < SCR_WIDTH)
+        {
+            my_mlx_pixel_put(&v->img, col, row, v->tex.floor_color);
             col++;
         }
         row++;
