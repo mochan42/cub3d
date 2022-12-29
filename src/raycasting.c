@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/28 22:15:27 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/29 17:30:13 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void    raycasting(t_prg *v)
     fill_background(v);
     init_textures(v);
     x = 0;
-
     while (x < SCR_WIDTH)
     {    
         // printf("--⬇️ -- x = %d --------------------------------------------------------\n", x);
@@ -150,6 +149,7 @@ void    raycasting(t_prg *v)
             // printf("sideDistY =%f, deltaDistY =%f, \n", v->graphics.sideDistY, v->graphics.deltaDistY);
             v->graphics.perpWallDist = (v->graphics.sideDistY - v->graphics.deltaDistY);
         }
+        // printf("v->graphics.perpWallDist =%f\n", v->graphics.perpWallDist);
         if (v->graphics.perpWallDist == 0)
            v->graphics.lineHeight = (int)SCR_HEIGHT;
         else
