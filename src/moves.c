@@ -17,9 +17,9 @@ void    move_forward(t_prg *v)
 	printf("move forward\n");
 	// printf("\tposX (before)= %f\n", v->player.posX);
     // printf("\tposY (before)= %f\n", v->player.posY);
-    if(v->map[(int)v->player.posY][(int)(v->player.posX + v->player.dirX * (double)MOVE_SPEED)] != '1')
+    if(v->map[(int)v->player.posY][(int)(v->player.posX + v->player.dirX * (double)MOVE_SPEED)] == '0')
 		v->player.posX += v->player.dirX * (double)MOVE_SPEED;
-    if(v->map[(int)(v->player.posY + v->player.dirY * (double)MOVE_SPEED)][(int)(v->player.posX)] != '1')
+    if(v->map[(int)(v->player.posY + v->player.dirY * (double)MOVE_SPEED)][(int)(v->player.posX)] == '0')
 		v->player.posY += v->player.dirY * (double)MOVE_SPEED;
 	printf("\tposX (after)= %f\n", v->player.posX);
     printf("\tposY (after)= %f\n", v->player.posY);
@@ -152,11 +152,13 @@ void    move_right(t_prg *v)
 	printf("move right\n");
 	// printf("\tposX (before)= %f\n", v->player.posX);
     // printf("\tposY (before)= %f\n", v->player.posY);
+	printf("\tdirX (before)= %f\n", v->player.dirX);
+	printf("\tdirY (before)= %f\n", v->player.dirY);
     if((v->player.dirX >= 0 && v->player.dirY < 0) && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
 		if (v->map[(int)(v->player.posY + fabs(v->player.dirX) * (double)MOVE_SPEED)]
-			&& v->map[(int)(v->player.posY + fabs(v->player.dirX) * (double)MOVE_SPEED)][(int)(v->player.posX + fabs(v->player.dirY))] == '0')
+			&& v->map[(int)(v->player.posY + fabs(v->player.dirX) * (double)MOVE_SPEED)][(int)(v->player.posX + fabs(v->player.dirY)* (double)MOVE_SPEED)] == '0')
 		{
 			v->player.posX += fabs(v->player.dirY) * (double)MOVE_SPEED;
 			v->player.posY += fabs(v->player.dirX) * (double)MOVE_SPEED;
@@ -177,17 +179,20 @@ void    move_right(t_prg *v)
 	{
 		if (v->map[(int)(v->player.posY - fabs(v->player.dirX) * (double)MOVE_SPEED)]
 			&& v->map[(int)(v->player.posY - fabs(v->player.dirX) * (double)MOVE_SPEED)][(int)(v->player.posX + fabs(v->player.dirY) * (double)MOVE_SPEED)] == '0')
-		v->player.posX += fabs(v->player.dirY) * (double)MOVE_SPEED;
-		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		{
+			v->player.posX += fabs(v->player.dirY) * (double)MOVE_SPEED;
+			v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		}
 	}	
     if((v->player.dirX < 0 && v->player.dirY >= 0) && \
 		v->map[(int)v->player.posY][(int)v->player.posX] == '0')
 	{
 		if(v->map[(int)(v->player.posY - fabs(v->player.dirX) * (double)MOVE_SPEED)]
 			&& v->map[(int)(v->player.posY - fabs(v->player.dirX) * (double)MOVE_SPEED)][(int)(v->player.posX - fabs(v->player.dirY) * (double)MOVE_SPEED) == '0'])
-		
-		v->player.posX -= fabs(v->player.dirY) * (double)MOVE_SPEED;
-		v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		{
+			v->player.posX -= fabs(v->player.dirY) * (double)MOVE_SPEED;
+			v->player.posY -= fabs(v->player.dirX) * (double)MOVE_SPEED;
+		}
 	}
 	printf("\tposX (after)= %f\n", v->player.posX);
     printf("\tposY (after)= %f\n", v->player.posY);
