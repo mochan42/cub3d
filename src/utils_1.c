@@ -6,11 +6,16 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:31:50 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/29 23:17:38 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:05:43 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 void    free_cub3d(t_prg *v)
 {
@@ -33,12 +38,13 @@ void    init_card_pt(int card_pt[4])
 
 void    check_direction(t_prg *v, int *validator)
 {
-    int    i;
-    int    j;
-
-    int    card_pt[4];
+    int	i;
+    int	j;
+	int	path[2];		
+    int	card_pt[4];
     init_card_pt(card_pt);
     i = v->map_i;
+	path[0] = 0;
     while (v->map[i] && (card_pt[0] || card_pt[1] || card_pt[2] || card_pt[3]))
     {
         j = 0;
@@ -50,6 +56,7 @@ void    check_direction(t_prg *v, int *validator)
         {
             printf("Invalid map : Wrong Identifier \n");
             *validator = 1;
+			return ;
         }
         if (ft_strncmp(ft_substr(v->map[i], 0, 2), "NO", 2) == 0 && card_pt[0])
             card_pt[0] = 0;
@@ -65,14 +72,16 @@ void    check_direction(t_prg *v, int *validator)
             *validator = 1;
             return ;
         }
-        while (v->map[i][j] && v->map[i][j] == ' ')
+		path[0] += 1;
+        while (v->map[i][j] && v->map[i][j] == 32)
             j++;
-        if (j <= 2)
-        {
-            printf("Invalid map : Wrong Identifier \n");
-            *validator = 1;
-            return ;
-        }
+        // if (j <= 1)
+        // {
+        //     printf("Invalid map : Wrong Identifier \n");
+        //     *validator = 1;
+        //     return ;
+        // }
+		path[1] = j;
         while (v->map[i][j] && (v->map[i][j] != ' ' && v->map[i][j] != '\n'))
             j++;
         if (v->map[i][j] == ' ')
@@ -87,6 +96,14 @@ void    check_direction(t_prg *v, int *validator)
             *validator = 1;
             return ;
         }
+		if (path[0] == 1)
+			v->tex.path_no = ft_substr(&v->map[i][path[1]], 0, j - path[1]);
+		if (path[0] == 2)
+			v->tex.path_so = ft_substr(&v->map[i][path[1]], 0, j - path[1]);
+		if (path[0] == 3)
+			v->tex.path_we = ft_substr(&v->map[i][path[1]], 0, j - path[1]);
+		if (path[0] == 4)
+			v->tex.path_ea = ft_substr(&v->map[i][path[1]], 0, j - path[1]);
         i++;
         v->map_i = i;
         skipe_empty_line(v);
@@ -144,6 +161,146 @@ int	isAllowedSpaceX(t_prg *v, int i, int j, int sens)
 	return 0;
 }
 
+void	check_ceil_and_floor_color(t_prg *v, int *validator) 
+{
+	int checker;
+	int	rgb[3];
+	int	nb[2];
+	int j;
+	
+	checker = 0;
+	while (v->map_i < v->row && checker <= 1)
+	{
+		j = 0;
+		while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+			j++;
+		if (v->map[v->map_i][j] && (v->map[v->map_i][j] == 'F' && !checker))
+		{
+			j++;
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			nb[0] = j;
+			while(v->map[v->map_i][j] && (v->map[v->map_i][j] >= '0' && v->map[v->map_i][j] <= '9'))
+				j++;
+			nb[1] = j;
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			if (!v->map[v->map_i][j] || v->map[v->map_i][j] != ',')
+			{
+				printf("Invalid map, bad definition Floor and Ceilling color\n");
+				*validator = 1;
+				return ;
+			}
+			j++;
+			rgb[0] = ft_atoi(ft_substr(&v->map[v->map_i][nb[0]], 0, nb[1] - nb[0]));
+			printf("RED %d\n", rgb[0]);
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			nb[0] = j;
+			while(v->map[v->map_i][j] && (v->map[v->map_i][j] >= '0' && v->map[v->map_i][j] <= '9'))
+				j++;
+			nb[1] = j;
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			if (nb[0] == nb[1] || (!v->map[v->map_i][j] || v->map[v->map_i][j] != ','))
+			{
+				printf("Invalid map, bad definition Floor and Ceilling color\n");
+				*validator = 1;
+				return ;
+			}
+			j++;
+			rgb[1] = ft_atoi(ft_substr(&v->map[v->map_i][nb[0]], 0, nb[1] - nb[0]));
+			printf("Yellow %d\n", rgb[1]);
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			nb[0] = j;
+			while(v->map[v->map_i][j] && (v->map[v->map_i][j] >= '0' && v->map[v->map_i][j] <= '9'))
+				j++;
+			nb[1] = j;
+			if (nb[0] == nb[1] || (v->map[v->map_i][j] != '\n' && v->map[v->map_i][j] != ' '))
+			{
+				printf("Invalid map, bad definition Floor and Ceilling color\n");
+				*validator = 1;
+				return ;
+			}
+			rgb[2] = ft_atoi(ft_substr(&v->map[v->map_i][nb[0]], 0, nb[1] - nb[0]));
+			printf("GREEN %d", rgb[2]);
+			skipe_empty_line(v);
+		}
+		else if (v->map[v->map_i][j] && v->map[v->map_i][j] == 'C' && checker == 1)
+		{
+			j++;
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			nb[0] = j;
+			while(v->map[v->map_i][j] && (v->map[v->map_i][j] >= '0' && v->map[v->map_i][j] <= '9'))
+				j++;
+			nb[1] = j;
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			if (!v->map[v->map_i][j] || v->map[v->map_i][j] != ',')
+			{
+				printf("Invalid map, bad definition Floor and Ceilling color\n");
+				*validator = 1;
+				return ;
+			}
+			j++;
+			rgb[0] = ft_atoi(ft_substr(&v->map[v->map_i][nb[0]], 0, nb[1] - nb[0]));
+			printf("RED %d\n", rgb[0]);
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			nb[0] = j;
+			while(v->map[v->map_i][j] && (v->map[v->map_i][j] >= '0' && v->map[v->map_i][j] <= '9'))
+				j++;
+			nb[1] = j;
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			if (nb[0] == nb[1] || (!v->map[v->map_i][j] || v->map[v->map_i][j] != ','))
+			{
+				printf("Invalid map, bad definition Floor and Ceilling color\n");
+				*validator = 1;
+				return ;
+			}
+			j++;
+			rgb[1] = ft_atoi(ft_substr(&v->map[v->map_i][nb[0]], 0, nb[1] - nb[0]));
+			printf("Yellow %d\n", rgb[1]);
+			while (v->map[v->map_i][j] && v->map[v->map_i][j] == 32)
+				j++;
+			nb[0] = j;
+			while(v->map[v->map_i][j] && (v->map[v->map_i][j] >= '0' && v->map[v->map_i][j] <= '9'))
+				j++;
+			nb[1] = j;
+			if (nb[0] == nb[1] || (v->map[v->map_i][j] != '\n' && v->map[v->map_i][j] != ' '))
+			{
+				printf("Invalid map, bad definition Floor and Ceilling color\n");
+				*validator = 1;
+				return ;
+			}
+			rgb[2] = ft_atoi(ft_substr(&v->map[v->map_i][nb[0]], 0, nb[1] - nb[0]));
+			printf("GREEN %d", rgb[2]);
+			skipe_empty_line(v);	
+		}
+		else 
+		{
+			printf("Invalid map, bad definition Floor and Ceilling color\n");
+			*validator = 1;
+			return ;
+		}
+		checker++;
+		if (rgb[0] > 255 || rgb[1] > 255 || rgb[2] > 255)
+		{
+			printf("Invalid map, bad definition Floor and Ceilling color\n");
+			*validator = 1;
+			return ;
+		}
+		if (checker == 1)
+			v->tex.floor_color = create_trgb(0, rgb[0], rgb[1], rgb[2]);
+		else if (checker == 2)
+			v->tex.ceiling_color = create_trgb(0, rgb[0], rgb[1], rgb[2]);
+		v->map_i++;
+	}
+}
+
 void    parsing(t_prg *v, int *validator)
 {
     int    p_len;
@@ -164,7 +321,7 @@ void    parsing(t_prg *v, int *validator)
 	printf("MAP CURSOR AFTER CHECK DIRECTION: %d\n", v->map_i);
     skipe_empty_line(v);
 	printf("MAP CURSOR BEFORE MAP: %d\n", v->map_i);
-	
+	check_ceil_and_floor_color(v, validator);
     i = v->map_i;
     j = 0;
 	while (i < v->row)

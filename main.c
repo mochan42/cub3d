@@ -6,7 +6,7 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/29 23:40:48 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:14:48 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main(int ac, char **av)
     int     validator;
     char    **tmp;
     int     i;
-	int		i2;
+	//int		i2;
 
     if (ac != 2)
         exit(0);
@@ -72,13 +72,13 @@ int main(int ac, char **av)
 	while (v->map_i < v->row)
 	{
         tmp[i] = ft_strdup(v->map[v->map_i]);
-		i2 = 0;
-		while (tmp[i][i2])
-		{
-			if (tmp[i][i2] == 32)
-				tmp[i][i2] = '1';
-			i2++;
-		}
+		// i2 = 0;
+		// while (tmp[i][i2])
+		// {
+		// 	if (tmp[i][i2] == 32)
+		// 		tmp[i][i2] = '1';
+		// 	i2++;
+		// }
         printf("%s", tmp[i]);
         i++;
         v->map_i++;

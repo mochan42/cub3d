@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 23:21:47 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/29 17:30:13 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/30 17:42:50 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void    fill_background(t_prg *v)
     int row;
     int col;
     
-    v->tex.ceiling_color = 0x0000FFFF;
-    v->tex.floor_color = 0x00C0C0C0;
+    // v->tex.ceiling_color = 0x0000FFFF;
+    // v->tex.floor_color = 0x00C0C0C0;
     row = 0;
     while (row < SCR_HEIGHT / 2)
     {

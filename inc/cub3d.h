@@ -167,7 +167,7 @@ void    raycasting(t_prg *v);
 
 /* textures.c*/
 void    create_texture_images(t_prg *v);
-void    load_texture_paths(t_prg *v);
+void    _texture_paths(t_prg *v);
 void    init_textures(t_prg *v);
 void    find_texture_coord(t_prg *v, t_img *wall_tex);
 t_img   *get_wall_tex(t_textures *tex);

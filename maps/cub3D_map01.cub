@@ -2,24 +2,22 @@
 
 
 
-NO     ./textures/brick_brown_64x64.xpm
+NO ./textures/redbrick.xpm
 
 
 
-SO        ./textures/brick_green_64x64.xpm
+SO              ./textures/greystone.xpm
 
 
-
-WE ./textures/wooden_box_64x64.xpm
-
-
-EA      ./textures/stones_64x64.xpm
+WE               ./textures/colorstone.xpm
 
 
+EA ./textures/wood.xpm
 
 
+F           150 , 100, 100
 
-
+C 30 , 30,200
 
 
 111111111111111111111111111111 1

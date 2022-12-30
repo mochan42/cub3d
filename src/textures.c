@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:59:54 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/28 12:15:07 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/30 16:51:41 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void    load_texture_paths(t_prg *v)
-{
-    v->tex.path_no = "./textures/greystone.xpm";
-    v->tex.path_so = "./textures/redbrick.xpm";
-    v->tex.path_ea = "./textures/wood.xpm";
-    v->tex.path_we = "./textures/colorstone.xpm";
-}
+// void    load_texture_paths(t_prg *v)
+// {
+//     v->tex.path_no = "./textures/greystone.xpm";
+//     v->tex.path_so = "./textures/redbrick.xpm";
+//     v->tex.path_ea = "./textures/wood.xpm";
+//     v->tex.path_we = "./textures/colorstone.xpm";
+// }
 
 // add error management in case of failure
 void    create_texture_images(t_prg *v)
@@ -40,7 +40,7 @@ void    get_texture_params(t_prg *v)
 
 void    init_textures(t_prg *v)
 {
-    load_texture_paths(v);
+    //_texture_paths(v);
     create_texture_images(v);
     get_texture_params(v);
 }
