@@ -170,16 +170,18 @@ void	rotate_right(t_prg *v);
 void    find_player_pos(t_prg *v);
 void    init_player_dir(t_prg *v);
 
-/* raycasting.c */
-void    fill_ceiling(t_prg *v, int *row);
-void    fill_floor(t_prg *v, int *row);
-void    fill_background(t_prg *v);
-void    init_graphics(t_prg *v);
-void    init_raycasting(t_prg *v, int x);
-void    calculate_ray(t_prg *v);
-void    check_if_ray_hits_wall(t_prg *v);
-void    compute_vertical_stripe(t_prg *v);
-void    raycasting(t_prg *v);
+/* raycasting_1.c */
+void	calculate_ray(t_prg *v);
+void	check_if_ray_hits_wall(t_prg *v);
+void	compute_vertical_stripe(t_prg *v);
+void	raycasting(t_prg *v);
+
+/* raycasting_2.c */
+void	fill_background(t_prg *v);
+void	fill_ceiling(t_prg *v, int *row);
+void	fill_floor(t_prg *v, int *row);
+void	init_graphics(t_prg *v);
+void	init_raycasting(t_prg *v, int x);
 
 /* textures_1.c*/
 void    add_texture(t_prg *v, t_img *wall_tex, int x);
@@ -193,11 +195,9 @@ void    create_texture_images(t_prg *v);
 void	get_texture_params(t_prg *v);
 
 /* utils_1.c */
-int		check_direction(t_prg *v, int *validator);
 int		empty_or_valid_char(t_prg *v, int i, int j, int *validator);
 int		check_map_content(t_prg *v, int *validator, int *isPos);
 void    parsing(t_prg *v, int *validator);
-int		check_process_path_texture(t_prg *v, int *i, int j, int path[2]);
 
 /* utils_2.c */
 int		create_trgb(int t, int r, int g, int b);
@@ -205,3 +205,45 @@ void    free_cub3d(t_prg *v);
 void    init_card_pt(int card_pt[4]);
 void	loop_card_points(t_prg *v, int i, int *j);
 void    skipe_empty_line(t_prg *v);
+
+/* utils_3.c */
+int		assign_path_to_texture(t_prg *v, int texture, char *path);
+int		is_valid_card_points(t_prg *v, int card_pt[4], int *validator, int i);
+int		is_valid_len_points(int j, int *validator);
+int		is_valid_textures_paths(t_prg *v, int i, int *j, int *validator);
+void	skype_spaces(t_prg *v, int i, int *j);
+
+/* utils_4.c */
+int		is_allowed_char(char c);
+int		check_direction(t_prg *v, int *validator);
+int		check_process_path_texture(t_prg *v, int *i, int j, int path[2]);
+int		is_init_player_pos(char c);
+int		process_path_texture(t_prg *v, int *i, int j, int path[2]);
+
+/* utils_5.c */
+void	get_color_value(int *red, char *str_color);
+int		is_allowed_space_x(t_prg *v, int i, int j, int sens);
+int		is_allowed_space_y(t_prg *v, int i, int j, int sens);
+int		is_comma_respected(t_prg *v, int i, int j, int *validator);
+void	reading_color_num_value(t_prg *v, int i, int *j, int nb[2]);
+
+/* utils_6.c */
+int		find_floor_ceilling(t_prg *v, int *j, int *validator, int checker);
+int		floor_ceilling_color(t_prg *v, int *j, int *validator);
+int		is_color_def_valid(t_prg *v, int nb[2], int j, int *validator);
+int		is_color_valid(t_prg *v, int *validator);
+int		is_comma2_respected(t_prg *v, int *j, int *validator);
+
+/* utils_7.c */
+int		check_ceil_and_floor_color(t_prg *v, int *validator);
+int		is_empty_line(t_prg *v, int i, int *validator);
+int		is_valid_char(t_prg *v, int i, int j, int *validator);
+int		is_valid_map_extension(t_prg *v, int *p_len, int *validator, int *isPos);
+void	valid_init_position(int isPos, int *validator);
+
+/* utils_8.c */
+int		is_zero_close(t_prg *v, int i, int j, int *validator);
+int		is_zero_close_down(t_prg *v, int i, int j, int *validator);
+int		is_zero_close_left(t_prg *v, int i, int j, int *validator);
+int		is_zero_close_right(t_prg *v, int i, int j, int *validator);
+int		is_zero_close_to_top(t_prg *v, int i, int j, int *validator);

@@ -33,8 +33,11 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES			:=	map.c camera.c player.c raycasting.c hooks.c \
-						utils_1.c utils_2.c moves.c \
+SRC_FILES			:=	map.c camera.c player.c hooks.c \
+						raycasting_1.c raycasting_2.c \
+						utils_1.c utils_2.c utils_3.c utils_4.c utils_5.c \
+						utils_6.c utils_7.c utils_8.c \
+						moves.c \
 						textures_1.c textures_2.c
 
 OBJ_FILES			:= ${SRC_FILES:.c=.o}
