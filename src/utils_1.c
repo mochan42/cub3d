@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:31:50 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 05:52:51 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:29:29 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,13 @@ int	is_valid_textures_paths(t_prg *v, int i, int *j, int *validator)
 	return (0);
 }
 
-void	assign_path_to_texture(t_prg *v, int texture, char *path)
+int	assign_path_to_texture(t_prg *v, int texture, char *path)
 {
+	if (access(path, F_OK) != 0)
+	{
+		printf("Invalid map : path texture not found !\n");
+		return (1);
+	}
 	if (texture == 1)
 		v->tex.path_no = ft_strdup(path);
 	if (texture == 2)
@@ -109,15 +114,18 @@ void	assign_path_to_texture(t_prg *v, int texture, char *path)
 		v->tex.path_we = ft_strdup(path);
 	if (texture == 4)
 		v->tex.path_ea = ft_strdup(path);
+	return (0);
 }
 
-void	process_path_texture(t_prg *v, int *i, int j, int path[2])
+int	process_path_texture(t_prg *v, int *i, int j, int path[2])
 {
-	assign_path_to_texture(v, path[0], ft_substr(&v->map[*i][path[1]], 0, j - path[1]));
+	if (assign_path_to_texture(v, path[0], ft_substr(&v->map[*i][path[1]], 0, j - path[1])) == 1)
+		return (1);
     *i += 1;
 	v->map_i = *i;
 	skipe_empty_line(v);
 	*i = v->map_i;
+	return (0);
 }
 
 int	check_direction(t_prg *v, int *validator)
@@ -143,7 +151,11 @@ int	check_direction(t_prg *v, int *validator)
 		path[1] = j;
 		if (is_valid_textures_paths(v, i, &j, validator) == 1)
 			return (1);
-		process_path_texture(v, &i, j, path);
+		if (process_path_texture(v, &i, j, path) == 1)
+		{
+			*validator = 1;
+			return (1);
+		}
     }
 	return (0);
 }
