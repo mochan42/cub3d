@@ -106,6 +106,8 @@ typedef struct s_prg {
 	char		**map;
 	int			nb_arg;
 	int			map_i;
+	int			rgb[3];
+	int			nb_rgb[2];
 }				t_prg;
 
 /* ########################################################################## */
@@ -178,6 +180,6 @@ void    add_texture(t_prg *v, t_img *wall_tex, int x);
 void    free_cub3d(t_prg *v);
 void    skipe_empty_line(t_prg *v);
 void    init_card_pt(int card_pt[4]);
-void    check_direction(t_prg *v, int *validator);
+int	check_direction(t_prg *v, int *validator);
 void    parsing(t_prg *v, int *validator);
 
