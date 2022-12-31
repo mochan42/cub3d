@@ -6,43 +6,11 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:31:50 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 18:29:29 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/31 20:27:20 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void    free_cub3d(t_prg *v)
-{
-    (void)v;
-}
-
-void    skipe_empty_line(t_prg *v)
-{
-    while (v->map[v->map_i] && v->map[v->map_i][0] == '\n')
-        v->map_i++;
-}
-
-void    init_card_pt(int card_pt[4])
-{
-    card_pt[0] = -1;
-    card_pt[1] = -1;
-    card_pt[2] = -1;
-    card_pt[3] = -1;
-}
-
-void	loop_card_points(t_prg *v, int i, int *j)
-{
-	 while (v->map[i][*j] && (v->map[i][*j] == 'N' || v->map[i][*j] == 'S'
-                || v->map[i][*j] == 'O' || v->map[i][*j] == 'W'
-                || v->map[i][*j] == 'E' || v->map[i][*j] == 'A'))
-            *j += 1;
-}
 
 int	is_valid_len_points(int j, int *validator)
 {
@@ -65,11 +33,14 @@ int	is_valid_card_points(t_prg *v, int card_pt[4], int *validator, int i)
 {
 	if (ft_strncmp(ft_substr(v->map[i], 0, 2), "NO", 2) == 0 && card_pt[0])
 		card_pt[0] = 0;
-	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "SO", 2) == 0 && !card_pt[0])
+	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "SO", 2) == 0 && \
+		!card_pt[0])
 		card_pt[1] = 0;
-	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "WE", 2) == 0 && !card_pt[1])
+	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "WE", 2) == 0 && \
+		!card_pt[1])
 		card_pt[2] = 0;
-	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "EA", 2) == 0 && !card_pt[2])
+	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "EA", 2) == 0 && \
+		!card_pt[2])
 		card_pt[3] = 0;
 	else
 	{
@@ -119,12 +90,23 @@ int	assign_path_to_texture(t_prg *v, int texture, char *path)
 
 int	process_path_texture(t_prg *v, int *i, int j, int path[2])
 {
-	if (assign_path_to_texture(v, path[0], ft_substr(&v->map[*i][path[1]], 0, j - path[1])) == 1)
+	if (assign_path_to_texture(v, path[0], ft_substr(&v->map[*i][path[1]], 0, \
+		j - path[1])) == 1)
 		return (1);
     *i += 1;
 	v->map_i = *i;
 	skipe_empty_line(v);
 	*i = v->map_i;
+	return (0);
+}
+
+
+int	check_process_path_texture(t_prg *v, int *i, int j, int path[2])
+{
+	if (process_path_texture(v, i, j, path) == 1)
+	{
+		return (1);
+	}
 	return (0);
 }
 
@@ -151,11 +133,8 @@ int	check_direction(t_prg *v, int *validator)
 		path[1] = j;
 		if (is_valid_textures_paths(v, i, &j, validator) == 1)
 			return (1);
-		if (process_path_texture(v, &i, j, path) == 1)
-		{
-			*validator = 1;
+		if (check_process_path_texture(v, &i, j, path) == 1)
 			return (1);
-		}
     }
 	return (0);
 }
@@ -236,7 +215,8 @@ int	is_color_def_valid(t_prg *v, int nb[2], int j, int *validator)
 {
 	while(v->map[v->map_i][j])
 	{
-		if ((nb[0] == nb[1]) || (v->map[v->map_i][j] != '\n' && v->map[v->map_i][j] != ' '))
+		if ((nb[0] == nb[1]) || (v->map[v->map_i][j] != '\n' && \
+			v->map[v->map_i][j] != ' '))
 		{
 			printf("Invalid map, bad definition Floor and Ceilling color\n");
 			*validator = 1;
@@ -248,7 +228,8 @@ int	is_color_def_valid(t_prg *v, int nb[2], int j, int *validator)
 }
 int	is_comma2_respected(t_prg *v, int *j, int *validator)
 {
-	if (v->nb_rgb[0] == v->nb_rgb[1] || (!v->map[v->map_i][*j] || v->map[v->map_i][*j] != ','))
+	if (v->nb_rgb[0] == v->nb_rgb[1] || (!v->map[v->map_i][*j] || \
+		v->map[v->map_i][*j] != ','))
 	{
 		printf("Invalid map, bad definition Floor and Ceilling color\n");
 		*validator = 1;
@@ -266,19 +247,22 @@ int	floor_ceilling_color(t_prg *v, int *j, int *validator)
 	if (is_comma_respected(v, v->map_i, *j, validator) == 1)
 		return (1);
 	*j +=1;
-	get_color_value(&v->rgb[0], ft_substr(&v->map[v->map_i][v->nb_rgb[0]], 0, v->nb_rgb[1] - v->nb_rgb[0]));
+	get_color_value(&v->rgb[0], ft_substr(&v->map[v->map_i][v->nb_rgb[0]], 0, \
+		v->nb_rgb[1] - v->nb_rgb[0]));
 	skype_spaces(v, v->map_i, j);
 	reading_color_num_value(v, v->map_i, j, v->nb_rgb);
 	skype_spaces(v, v->map_i, j);
 	if (is_comma2_respected(v, j, validator) == 1)
 		return (1);
 	*j += 1;
-	get_color_value(&v->rgb[1], ft_substr(&v->map[v->map_i][v->nb_rgb[0]], 0, v->nb_rgb[1] - v->nb_rgb[0]));
+	get_color_value(&v->rgb[1], ft_substr(&v->map[v->map_i][v->nb_rgb[0]], 0, \
+		v->nb_rgb[1] - v->nb_rgb[0]));
 	skype_spaces(v, v->map_i, j);
 	reading_color_num_value(v, v->map_i, j, v->nb_rgb);
 	if (is_color_def_valid(v, v->nb_rgb, *j, validator) == 1)
 		return (1);
-	get_color_value(&v->rgb[2], ft_substr(&v->map[v->map_i][v->nb_rgb[0]], 0, v->nb_rgb[1] - v->nb_rgb[0]));
+	get_color_value(&v->rgb[2], ft_substr(&v->map[v->map_i][v->nb_rgb[0]], 0, \
+		v->nb_rgb[1] - v->nb_rgb[0]));
 	return (0);
 }
 
@@ -472,7 +456,17 @@ int is_zero_close(t_prg *v, int i, int j, int *validator)
 		return (1);
 	return (0);
 }
-void	check_map_content(t_prg *v, int *validator, int *isPos)
+
+int	empty_or_valid_char(t_prg *v, int i, int j, int *validator)
+{
+	if (isEmpty_line(v, i, validator) == 1)
+		return (1);
+	if (isValid_char(v, i, j, validator) == 1)
+		return (1);
+	return (0);
+}
+
+int	check_map_content(t_prg *v, int *validator, int *isPos)
 {
 	int	i;
 	int	j;
@@ -482,22 +476,22 @@ void	check_map_content(t_prg *v, int *validator, int *isPos)
 	while (i < v->row)
 	{
 		j = 0;
-		while (v->map[i][j]) {
-			if (isEmpty_line(v, i, validator) == 1)
-				return ;
-			if (isValid_char(v, i, j, validator) == 1)
-				return ;
+		while (v->map[i][j])
+		{
+			if (empty_or_valid_char(v, i, j, validator) == 1)
+				return (1);
 			if (v->map[i][j] == '0' || isInitPlayerPos(v->map[i][j]))
 			{
 				if (isInitPlayerPos(v->map[i][j]))
 					*isPos +=1;
-				if(is_zero_close(v, i, j, validator) == 1)
-					return;
+				if (is_zero_close(v, i, j, validator) == 1)
+					return (1);
 			}
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
 void	parsing(t_prg *v, int *validator)
@@ -509,11 +503,15 @@ void	parsing(t_prg *v, int *validator)
 		return ;
     skipe_empty_line(v);
 	if (check_direction(v, validator) == 1)
+	{
+		*validator = 1;
 		return;
+	}		
     skipe_empty_line(v);
 	if (check_ceil_and_floor_color(v, validator) == 1)
 		return ;
 	skipe_empty_line(v);
-    check_map_content(v, validator, &isPos);
+    if (check_map_content(v, validator, &isPos) == 1)
+		return ;
 	valid_init_position(isPos, validator);
 }

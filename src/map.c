@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:45:33 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/11 10:00:11 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/31 18:37:23 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,26 @@ char	**store_map(t_prg *v)
 	return (v->map);
 }
 
-void    print_map(t_prg *v)
-{
-    int i;
-    int j;
+// void    print_map(t_prg *v)
+// {
+//     int i;
+//     int j;
 
-    i = 0;
-    if (!v->map)
-	{
-        printf("No map found.\n");
-		return ;
-	}
-    while (i < v->row)
-	// while (v->map[i] != NULL)
-    {
-        j = 0;
-        while (v->map[i][j] != '\0')
-        {
-            printf("%c", v->map[i][j]);
-            j++;
-        }
-        i++;
-    }
-    printf("\n");
-}
+//     i = 0;
+//     if (!v->map)
+// 	{
+//         printf("No map found.\n");
+// 		return ;
+// 	}
+//     while (i < v->row)
+//     {
+//         j = 0;
+//         while (v->map[i][j] != '\0')
+//         {
+//             printf("%c", v->map[i][j]);
+//             j++;
+//         }
+//         i++;
+//     }
+//     printf("\n");
+// }

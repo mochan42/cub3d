@@ -143,7 +143,7 @@ int		key_hook(int keycode, t_prg *v);
 int		count_nb_col(char *map_path);
 int		count_nb_row(char *map_path);
 void    init_player_pos(t_prg *v);
-void    print_map(t_prg *v);
+// void    print_map(t_prg *v);
 char	**store_map(t_prg *v);
 
 /* main.c */
@@ -153,7 +153,15 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 /* moves.c */
 void	move_backwards(t_prg *v);
 void	move_forward(t_prg *v);
+void	move_left_dirXPos_dirYNeg(t_prg *v);
+void	move_left_dirXPos_dirYPos(t_prg *v);
+void	move_left_dirXNeg_dirYNeg(t_prg *v);
+void	move_left_dirXNeg_dirYPos(t_prg *v);
 void    move_left(t_prg *v);
+void	move_right_dirXPos_dirYNeg(t_prg *v);
+void	move_right_dirXPos_dirYPos(t_prg *v);
+void	move_right_dirXNeg_dirYNeg(t_prg *v);
+void	move_right_dirXNeg_dirYPos(t_prg *v);
 void    move_right(t_prg *v);
 void	rotate_left(t_prg *v);
 void	rotate_right(t_prg *v);
@@ -163,23 +171,37 @@ void    find_player_pos(t_prg *v);
 void    init_player_dir(t_prg *v);
 
 /* raycasting.c */
+void    fill_ceiling(t_prg *v, int *row);
+void    fill_floor(t_prg *v, int *row);
 void    fill_background(t_prg *v);
 void    init_graphics(t_prg *v);
+void    init_raycasting(t_prg *v, int x);
+void    calculate_ray(t_prg *v);
+void    check_if_ray_hits_wall(t_prg *v);
+void    compute_vertical_stripe(t_prg *v);
 void    raycasting(t_prg *v);
 
-/* textures.c*/
-void    create_texture_images(t_prg *v);
-void    _texture_paths(t_prg *v);
-void    init_textures(t_prg *v);
+/* textures_1.c*/
+void    add_texture(t_prg *v, t_img *wall_tex, int x);
+void    apply_wall_tex(t_prg *v, t_graphics *graphics);
 void    find_texture_coord(t_prg *v, t_img *wall_tex);
 t_img   *get_wall_tex(t_textures *tex);
-void    apply_wall_tex(t_prg *v, t_graphics *graphics);
-void    add_texture(t_prg *v, t_img *wall_tex, int x);
+void    init_textures(t_prg *v);
+
+/* textures_2.c*/
+void    create_texture_images(t_prg *v);
+void	get_texture_params(t_prg *v);
 
 /* utils_1.c */
-void    free_cub3d(t_prg *v);
-void    skipe_empty_line(t_prg *v);
-void    init_card_pt(int card_pt[4]);
-int	check_direction(t_prg *v, int *validator);
+int		check_direction(t_prg *v, int *validator);
+int		empty_or_valid_char(t_prg *v, int i, int j, int *validator);
+int		check_map_content(t_prg *v, int *validator, int *isPos);
 void    parsing(t_prg *v, int *validator);
+int		check_process_path_texture(t_prg *v, int *i, int j, int path[2]);
 
+/* utils_2.c */
+int		create_trgb(int t, int r, int g, int b);
+void    free_cub3d(t_prg *v);
+void    init_card_pt(int card_pt[4]);
+void	loop_card_points(t_prg *v, int i, int *j);
+void    skipe_empty_line(t_prg *v);

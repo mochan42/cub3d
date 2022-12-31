@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 18:15:14 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/28 20:19:35 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/31 19:03:14 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,4 @@ void    init_player_dir(t_prg *v)
         v->player.dirX = 1;
         v->player.dirY = 0;
     }
-    printf("dirX = %f\n", v->player.dirX);
-    printf("dirY = %f\n", v->player.dirY);
 }

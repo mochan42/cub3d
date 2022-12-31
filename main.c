@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 18:18:16 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/31 19:02:57 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 void    init_prg(t_prg *v)
 {
     v->row = count_nb_row(v->map_path);
-    printf("nb of rows = %d\n", v->row);
     v->map = store_map(v);
     v->map_i = 0;
 }
 
 void    update_prog(t_prg *v) 
 {
-    print_map(v);
     find_player_pos(v);
-    printf("posX = %f\n", v->player.posX);
-    printf("posY = %f\n", v->player.posY);
     init_camera_pos(v);
     init_player_dir(v);
     init_camera_dir(v);
