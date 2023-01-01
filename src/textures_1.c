@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 14:59:54 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 19:53:39 by moninechan       ###   ########.fr       */
+/*   Updated: 2022/12/31 23:36:34 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@ void	init_textures(t_prg *v)
 void	find_texture_coord(t_prg *v, t_img *wall_tex)
 {
 	if (v->graphics.side == 0)
-		v->graphics.wallX = v->player.posY + v->graphics.perpWallDist * \
-			v->graphics.rayDirY;
+		v->graphics.wall_x = v->player.pos_y + v->graphics.perpwalldist * \
+			v->graphics.raydir_y;
 	else
-		v->graphics.wallX = v->player.posX + v->graphics.perpWallDist * \
-			v->graphics.rayDirX;
-	v->graphics.wallX -= floor(v->graphics.wallX);
-	v->graphics.tex_x = (int)(v->graphics.wallX * (double)wall_tex->width);
-	if ((v->graphics.side == 0 && v->graphics.rayDirX > 0) || \
-		(v->graphics.side == 1 && v->graphics.rayDirY < 0))
+		v->graphics.wall_x = v->player.pos_x + v->graphics.perpwalldist * \
+			v->graphics.raydir_x;
+	v->graphics.wall_x -= floor(v->graphics.wall_x);
+	v->graphics.tex_x = (int)(v->graphics.wall_x * (double)wall_tex->width);
+	if ((v->graphics.side == 0 && v->graphics.raydir_x > 0) || \
+		(v->graphics.side == 1 && v->graphics.raydir_y < 0))
 		v->graphics.tex_x = wall_tex->width - v->graphics.tex_x;
-	v->graphics.tex_y_step = wall_tex->height / (double)v->graphics.lineHeight;
+	v->graphics.tex_y_step = wall_tex->height / (double)v->graphics.line_height;
 	v->graphics.tex_y = 0;
-	if (v->graphics.lineHeight > SCR_HEIGHT)
-		v->graphics.tex_y = (v->graphics.lineHeight - SCR_HEIGHT) * \
+	if (v->graphics.line_height > SCR_HEIGHT)
+		v->graphics.tex_y = (v->graphics.line_height - SCR_HEIGHT) * \
 			v->graphics.tex_y_step / 2;
 }
 
 t_img	*get_wall_tex(t_textures *tex)
 {
-	if (tex->toApply == 'W')
+	if (tex->to_apply == 'W')
 		return (&(tex->we));
-	else if (tex->toApply == 'N')
+	else if (tex->to_apply == 'N')
 		return (&(tex->no));
-	else if (tex->toApply == 'E')
+	else if (tex->to_apply == 'E')
 		return (&(tex->ea));
 	else
 		return (&(tex->so));
@@ -52,29 +52,29 @@ t_img	*get_wall_tex(t_textures *tex)
 
 void	apply_wall_tex(t_prg *v, t_graphics *graphics)
 {
-	if (graphics->stepY == -1 && graphics->stepX == -1 && graphics->side == 1)
-		v->tex.toApply = 'N';
-	else if (graphics->stepY == 1 && graphics->stepX == -1 && \
+	if (graphics->step_y == -1 && graphics->step_x == -1 && graphics->side == 1)
+		v->tex.to_apply = 'N';
+	else if (graphics->step_y == 1 && graphics->step_x == -1 && \
 		graphics->side == 0)
-		v->tex.toApply = 'W';
-	else if (graphics->stepY == -1 && graphics->stepX == -1 && \
+		v->tex.to_apply = 'W';
+	else if (graphics->step_y == -1 && graphics->step_x == -1 && \
 		graphics->side == 0)
-		v->tex.toApply = 'W';
-	else if (graphics->stepY == -1 && graphics->stepX == 1 && \
+		v->tex.to_apply = 'W';
+	else if (graphics->step_y == -1 && graphics->step_x == 1 && \
 		graphics->side == 0)
-		v->tex.toApply = 'E';
-	else if (graphics->stepY == 1 && graphics->stepX == 1 && \
+		v->tex.to_apply = 'E';
+	else if (graphics->step_y == 1 && graphics->step_x == 1 && \
 		graphics->side == 1)
-		v->tex.toApply = 'S';
-	else if (graphics->stepY == 1 && graphics->stepX == -1 && \
+		v->tex.to_apply = 'S';
+	else if (graphics->step_y == 1 && graphics->step_x == -1 && \
 		graphics->side == 1)
-		v->tex.toApply = 'S';
-	else if (graphics->stepY == -1 && graphics->stepX == 1 && \
+		v->tex.to_apply = 'S';
+	else if (graphics->step_y == -1 && graphics->step_x == 1 && \
 		graphics->side == 1)
-		v->tex.toApply = 'N';
-	else if (graphics->stepY == 1 && graphics->stepX == 1 && \
+		v->tex.to_apply = 'N';
+	else if (graphics->step_y == 1 && graphics->step_x == 1 && \
 		graphics->side == 0)
-		v->tex.toApply = 'E';
+		v->tex.to_apply = 'E';
 }
 
 void	add_texture(t_prg *v, t_img *wall_tex, int x)
@@ -86,8 +86,8 @@ void	add_texture(t_prg *v, t_img *wall_tex, int x)
 
 	tex_graphics = &v->graphics;
 	find_texture_coord(v, wall_tex);
-	y = tex_graphics->drawStart;
-	while (y < tex_graphics->drawEnd)
+	y = tex_graphics->draw_start;
+	while (y < tex_graphics->draw_end)
 	{
 		tex_addr = NULL;
 		tex_addr = wall_tex->addr + ((int)(tex_graphics->tex_y) % \

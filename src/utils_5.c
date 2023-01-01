@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:49:41 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 20:54:41 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 01:41:51 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ int	is_comma_respected(t_prg *v, int i, int j, int *validator)
 void	get_color_value(int *red, char *str_color)
 {
 	*red = ft_atoi(str_color);
+	free(str_color);
 }

@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:37:49 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 20:38:20 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 01:59:08 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,25 @@ void	skype_spaces(t_prg *v, int i, int *j)
 
 int	is_valid_card_points(t_prg *v, int card_pt[4], int *validator, int i)
 {
-	if (ft_strncmp(ft_substr(v->map[i], 0, 2), "NO", 2) == 0 && card_pt[0])
+	char	*str;
+
+	str = ft_substr(v->map[i], 0, 2);
+	if (ft_strncmp(str, "NO", 2) == 0 && card_pt[0])
 		card_pt[0] = 0;
-	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "SO", 2) == 0 && \
-		!card_pt[0])
+	else if (ft_strncmp(str, "SO", 2) == 0 && !card_pt[0])
 		card_pt[1] = 0;
-	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "WE", 2) == 0 && \
-		!card_pt[1])
+	else if (ft_strncmp(str, "WE", 2) == 0 && !card_pt[1])
 		card_pt[2] = 0;
-	else if (ft_strncmp(ft_substr(v->map[i], 0, 2), "EA", 2) == 0 && \
-		!card_pt[2])
+	else if (ft_strncmp(str, "EA", 2) == 0 && !card_pt[2])
 		card_pt[3] = 0;
 	else
 	{
+		free(str);
 		printf("Invalid map : Wrong Identifier \n");
 		*validator = 1;
 		return (1);
 	}
+	free(str);
 	return (0);
 }
 

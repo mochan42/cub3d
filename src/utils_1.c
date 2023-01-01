@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:31:50 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 21:17:29 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 02:00:19 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,39 @@ void	parsing(t_prg *v, int *validator)
 	if (check_map_content(v, validator, &is_pos) == 1)
 		return ;
 	valid_init_position(is_pos, validator);
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	copy_cub_file(t_prg *v)
+{
+	char	**tmp;
+	int		i;
+	int		i2;
+
+	i = 0;
+	tmp = malloc(sizeof(char *) * (v->row - v->map_i + 1));
+	while (v->map_i < v->row)
+	{
+		tmp[i] = ft_strdup(v->map[v->map_i]);
+		i2 = 0;
+		while (tmp[i][i2])
+		{
+			if (tmp[i][i2] == 32)
+				tmp[i][i2] = '1';
+			i2++;
+		}
+		i++;
+		v->map_i++;
+	}
+	tmp[i] = NULL;
+	free_2d_char(v->map);
+	v->map = tmp;
+	v->row = i;
 }

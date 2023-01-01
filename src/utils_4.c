@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:41:28 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 20:49:13 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 01:58:51 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,19 @@
 
 int	process_path_texture(t_prg *v, int *i, int j, int path[2])
 {
-	if (assign_path_to_texture(v, path[0], ft_substr(&v->map[*i][path[1]], 0, \
-		j - path[1])) == 1)
+	char	*str;
+
+	str = ft_substr(&v->map[*i][path[1]], 0, j - path[1]);
+	if (assign_path_to_texture(v, path[0], str) == 1)
+	{
+		free(str);
 		return (1);
+	}
 	*i += 1;
 	v->map_i = *i;
 	skipe_empty_line(v);
 	*i = v->map_i;
+	free(str);
 	return (0);
 }
 

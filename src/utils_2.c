@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:26:56 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 20:34:48 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 00:26:23 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-void	free_cub3d(t_prg *v)
-{
-	(void)v;
 }
 
 void	skipe_empty_line(t_prg *v)

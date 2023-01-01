@@ -19,12 +19,12 @@
 # include "../mlx/mlx.h"
 # include <stdio.h>
 # include <math.h>
-#endif
 
 /* ########################################################################## */
 /* STRUCTURES */
 
-typedef struct	s_img {
+typedef struct s_img
+{
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
@@ -34,7 +34,8 @@ typedef struct	s_img {
 	int			width;
 }				t_img;
 
-typedef	struct s_textures {
+typedef struct s_textures
+{
 	t_img		no;
 	t_img		so;
 	t_img		ea;
@@ -43,56 +44,59 @@ typedef	struct s_textures {
 	char		*path_so;
 	char		*path_ea;
 	char		*path_we;
-	char		toApply;
+	char		to_apply;
 	int			ceiling_color;
 	int			floor_color;
 }				t_textures;
 
-typedef struct s_camera {
+typedef struct s_camera
+{
 	char		initial_camera_direction;
-	double		planeX;
-	double		planeY;
-	double		oldPlaneX;
-	double		oldPlaneY;
+	double		plane_x;
+	double		plane_y;
+	double		oldplane_x;
+	double		oldplane_y;
 }				t_camera;
 
-typedef struct s_graphics {
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
-	int			mapX;
-	int			mapY;
-	double		sideDistX;
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	double		perpWallDist;
-	int			stepX;
-	int			stepY;
+typedef struct s_graphics
+{
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	int			map_x;
+	int			map_y;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	double		perpwalldist;
+	int			step_x;
+	int			step_y;
 	int			hit;
 	int			side;
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 	double		color;
 	int			tex_x;
 	double		tex_y;
 	double		tex_y_step;
-	// double		tex_pos;
-	double		wallX;
+	double		wall_x;
 }				t_graphics;
 
-typedef struct s_player {
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		oldDirX;
-	double		oldDirY;
+typedef struct s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		olddir_x;
+	double		olddir_y;
 	double		player_angle;
 }				t_player;
 
-typedef struct s_prg {
+typedef struct s_prg
+{
 	void		*mlx;
 	void		*mlx_win;
 	t_img		img;
@@ -134,7 +138,7 @@ typedef struct s_prg {
 
 /* camera.c */
 void	init_camera_dir(t_prg *v);
-void    init_camera_pos(t_prg *v);
+void	init_camera_pos(t_prg *v);
 
 /* hooks.c */
 int		key_hook(int keycode, t_prg *v);
@@ -142,33 +146,36 @@ int		key_hook(int keycode, t_prg *v);
 /* map.c */
 int		count_nb_col(char *map_path);
 int		count_nb_row(char *map_path);
-void    init_player_pos(t_prg *v);
-// void    print_map(t_prg *v);
+void	init_player_pos(t_prg *v);
 char	**store_map(t_prg *v);
 
 /* main.c */
 int		ft_close_window(t_prg *v);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
-/* moves.c */
+/* moves_1.c */
 void	move_backwards(t_prg *v);
 void	move_forward(t_prg *v);
-void	move_left_dirXPos_dirYNeg(t_prg *v);
-void	move_left_dirXPos_dirYPos(t_prg *v);
-void	move_left_dirXNeg_dirYNeg(t_prg *v);
-void	move_left_dirXNeg_dirYPos(t_prg *v);
-void    move_left(t_prg *v);
-void	move_right_dirXPos_dirYNeg(t_prg *v);
-void	move_right_dirXPos_dirYPos(t_prg *v);
-void	move_right_dirXNeg_dirYNeg(t_prg *v);
-void	move_right_dirXNeg_dirYPos(t_prg *v);
-void    move_right(t_prg *v);
 void	rotate_left(t_prg *v);
 void	rotate_right(t_prg *v);
 
+/* moves_2.c */
+void	move_left(t_prg *v);
+void	move_left_dir_x_neg_and_dir_y_neg(t_prg *v);
+void	move_left_dir_x_neg_and_dir_y_pos(t_prg *v);
+void	move_left_dir_x_pos_and_dir_y_neg(t_prg *v);
+void	move_left_dir_x_pos_and_dir_y_pos(t_prg *v);
+
+/* moves_3.c */
+void	move_right(t_prg *v);
+void	move_right_dir_x_neg_and_dir_y_neg(t_prg *v);
+void	move_right_dir_x_neg_and_dir_y_pos(t_prg *v);
+void	move_right_dir_x_pos_and_dir_y_neg(t_prg *v);
+void	move_right_dir_x_pos_and_dir_y_pos(t_prg *v);
+
 /* player.c */
-void    find_player_pos(t_prg *v);
-void    init_player_dir(t_prg *v);
+void	find_player_pos(t_prg *v);
+void	init_player_dir(t_prg *v);
 
 /* raycasting_1.c */
 void	calculate_ray(t_prg *v);
@@ -184,27 +191,28 @@ void	init_graphics(t_prg *v);
 void	init_raycasting(t_prg *v, int x);
 
 /* textures_1.c*/
-void    add_texture(t_prg *v, t_img *wall_tex, int x);
-void    apply_wall_tex(t_prg *v, t_graphics *graphics);
-void    find_texture_coord(t_prg *v, t_img *wall_tex);
-t_img   *get_wall_tex(t_textures *tex);
-void    init_textures(t_prg *v);
+void	add_texture(t_prg *v, t_img *wall_tex, int x);
+void	apply_wall_tex(t_prg *v, t_graphics *graphics);
+void	find_texture_coord(t_prg *v, t_img *wall_tex);
+t_img	*get_wall_tex(t_textures *tex);
+void	init_textures(t_prg *v);
 
 /* textures_2.c*/
-void    create_texture_images(t_prg *v);
+void	create_texture_images(t_prg *v);
 void	get_texture_params(t_prg *v);
 
 /* utils_1.c */
+void	copy_cub_file(t_prg *v);
 int		empty_or_valid_char(t_prg *v, int i, int j, int *validator);
 int		check_map_content(t_prg *v, int *validator, int *isPos);
-void    parsing(t_prg *v, int *validator);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	parsing(t_prg *v, int *validator);
 
 /* utils_2.c */
 int		create_trgb(int t, int r, int g, int b);
-void    free_cub3d(t_prg *v);
-void    init_card_pt(int card_pt[4]);
+void	init_card_pt(int card_pt[4]);
 void	loop_card_points(t_prg *v, int i, int *j);
-void    skipe_empty_line(t_prg *v);
+void	skipe_empty_line(t_prg *v);
 
 /* utils_3.c */
 int		assign_path_to_texture(t_prg *v, int texture, char *path);
@@ -238,7 +246,8 @@ int		is_comma2_respected(t_prg *v, int *j, int *validator);
 int		check_ceil_and_floor_color(t_prg *v, int *validator);
 int		is_empty_line(t_prg *v, int i, int *validator);
 int		is_valid_char(t_prg *v, int i, int j, int *validator);
-int		is_valid_map_extension(t_prg *v, int *p_len, int *validator, int *isPos);
+int		is_valid_map_extension(t_prg *v, int *p_len, int *validator, \
+	int *isPos);
 void	valid_init_position(int isPos, int *validator);
 
 /* utils_8.c */
@@ -247,3 +256,10 @@ int		is_zero_close_down(t_prg *v, int i, int j, int *validator);
 int		is_zero_close_left(t_prg *v, int i, int j, int *validator);
 int		is_zero_close_right(t_prg *v, int i, int j, int *validator);
 int		is_zero_close_to_top(t_prg *v, int i, int j, int *validator);
+
+/* utils_9.c */
+void	free_2d_char(char **map);
+void	free_cub3d(t_prg *v);
+int		ft_close_window(t_prg *v);
+
+#endif
