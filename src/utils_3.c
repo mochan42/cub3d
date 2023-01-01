@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:37:49 by moninechan        #+#    #+#             */
-/*   Updated: 2023/01/01 01:59:08 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 20:00:55 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,25 @@ int	is_valid_card_points(t_prg *v, int card_pt[4], int *validator, int i)
 		card_pt[3] = 0;
 	else
 	{
-		free(str);
+		if (str)
+			free(str);
 		printf("Invalid map : Wrong Identifier \n");
 		*validator = 1;
 		return (1);
 	}
-	free(str);
+	if (str)
+		free(str);
 	return (0);
 }
 
 int	is_valid_textures_paths(t_prg *v, int i, int *j, int *validator)
 {
+	int	tmp;
+
+	tmp = *j;
 	while (v->map[i][*j] && (v->map[i][*j] != ' ' && v->map[i][*j] != '\n'))
 		*j += 1;
-	if (v->map[i][*j] == ' ')
+	if (tmp == *j)
 	{
 		printf("Invalid map : Wrong texture path\n");
 		*validator = 1;

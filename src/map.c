@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:45:33 by moninechan        #+#    #+#             */
-/*   Updated: 2023/01/01 01:15:54 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 19:01:55 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**store_map(t_prg *v)
 	char	**tmp_map;
 
 	row_index = 0;
-	tmp_map = malloc(sizeof(char *) * (v->row));
+	tmp_map = malloc(sizeof(char *) * (v->row + 1));
 	if (!tmp_map)
 		return (0);
 	fd = open(v->map_path, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:31:50 by moninechan        #+#    #+#             */
-/*   Updated: 2023/01/01 02:00:19 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 20:47:10 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 int	empty_or_valid_char(t_prg *v, int i, int j, int *validator)
 {
-	if (is_empty_line(v, i, validator) == 1)
-		return (1);
-	if (is_valid_char(v, i, j, validator) == 1)
-		return (1);
+	if (v->map[i] != NULL && v->map[i][j] != '\0')
+	{
+		if (v->map[i][j] != 32 && v->map[i][j] != '\n')
+		{
+			if (!is_allowed_char(v->map[i][j]))
+			{
+				printf("Invalid character in map\n");
+				*validator = 1;
+				return (1);
+			}
+		}
+		if (is_empty_line(v, i, validator) == 1)
+			return (1);
+		if (is_valid_char(v, i, j, validator) == 1)
+			return (1);
+	}
 	return (0);
 }
 
@@ -28,7 +40,7 @@ int	check_map_content(t_prg *v, int *validator, int *is_pos)
 
 	i = v->map_i;
 	j = 0;
-	while (i < v->row)
+	while (i < v->row && v->map[i] != NULL)
 	{
 		j = 0;
 		while (v->map[i][j])
@@ -61,7 +73,7 @@ void	parsing(t_prg *v, int *validator)
 	{
 		*validator = 1;
 		return ;
-	}		
+	}	
 	skipe_empty_line(v);
 	if (check_ceil_and_floor_color(v, validator) == 1)
 		return ;

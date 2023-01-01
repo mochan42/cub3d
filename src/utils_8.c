@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 21:09:15 by moninechan        #+#    #+#             */
-/*   Updated: 2022/12/31 21:11:54 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 20:45:11 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_zero_close_to_top(t_prg *v, int i, int j, int *validator)
 {
+	if (empty_or_valid_char(v, i - 1, j, validator) == 1)
+		return (1);
 	if (i == v->map_i || i == v->row - 1 || j == 0)
 	{
 		printf("The map should be surrounded by the wall\n");
@@ -36,6 +38,8 @@ int	is_zero_close_to_top(t_prg *v, int i, int j, int *validator)
 
 int	is_zero_close_down(t_prg *v, int i, int j, int *validator)
 {
+	if (empty_or_valid_char(v, i + 1, j, validator) == 1)
+		return (1);
 	if (!is_allowed_char(v->map[i + 1][j]))
 	{
 		if (is_allowed_space_x(v, i + 1, j, 1))
@@ -52,6 +56,8 @@ int	is_zero_close_down(t_prg *v, int i, int j, int *validator)
 
 int	is_zero_close_right(t_prg *v, int i, int j, int *validator)
 {
+	if (empty_or_valid_char(v, i, j + 1, validator) == 1)
+		return (1);
 	if (v->map[i][j + 1] && !is_allowed_char(v->map[i][j + 1]))
 	{
 		if (is_allowed_space_y(v, i, j + 1, 1))
@@ -68,6 +74,8 @@ int	is_zero_close_right(t_prg *v, int i, int j, int *validator)
 
 int	is_zero_close_left(t_prg *v, int i, int j, int *validator)
 {
+	if (empty_or_valid_char(v, i, j - 1, validator) == 1)
+		return (1);
 	if (!is_allowed_char(v->map[i][j - 1]))
 	{
 		if (is_allowed_space_y(v, i, j - 1, 0))

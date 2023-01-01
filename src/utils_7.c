@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 21:00:02 by moninechan        #+#    #+#             */
-/*   Updated: 2023/01/01 01:26:55 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 20:30:49 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int	check_ceil_and_floor_color(t_prg *v, int *validator)
 
 int	is_valid_map_extension(t_prg *v, int *p_len, int *validator, int *is_pos)
 {
+	if (access(v->map_path, F_OK) != 0)
+	{
+		printf("Invalid path for the .cub file\n");
+		*validator = 1;
+		return (1);
+	}
 	*p_len = ft_strlen(v->map_path);
 	*is_pos = 0;
 	if (ft_strncmp(&v->map_path[*p_len - 4], ".cub", 4) != 0)
@@ -67,8 +73,8 @@ int	is_empty_line(t_prg *v, int i, int *validator)
 
 int	is_valid_char(t_prg *v, int i, int j, int *validator)
 {
-	if (!is_allowed_char(v->map[i][j]) && v->map[i][j] != 32 && \
-		v->map[i][j] != '\n')
+	if (!is_allowed_char(v->map[i][j]) && (v->map[i][j] != 32 && \
+		v->map[i][j] != '\n'))
 	{
 		printf("Invalid character in map\n");
 		*validator = 1;

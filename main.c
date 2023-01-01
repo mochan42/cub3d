@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:45:45 by moninechan        #+#    #+#             */
-/*   Updated: 2023/01/01 02:02:57 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 21:07:07 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	main(int ac, char **av)
 	int		validator;
 
 	if (ac != 2)
+	{
+		printf("1 argument only is required for cub3D.\n");
 		exit(0);
+	}
 	v = malloc(sizeof(t_prg) * 1);
 	v->map_path = ft_strdup(av[1]);
 	init_prg(v);

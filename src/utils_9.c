@@ -22,25 +22,28 @@ void	free_2d_char(char **map)
 		free(map[i]);
 		i++;
 	}
-	free(map[i]);
-	free(map);
+	if (map[i] != NULL)
+		free(map[i]);
+	if (map != NULL)
+		free(map);
+	map = NULL;
 }
 
 void	free_cub3d(t_prg *v)
 {
-	if (v->map_path)
+	if (v->map_path != NULL)
 		free(v->map_path);
-	if (v->map)
+	if (v->map != NULL)
 		free_2d_char(v->map);
-	if (v->tex.path_no)
+	if (v->tex.path_no != NULL)
 		free(v->tex.path_no);
-	if (v->tex.path_so)
+	if (v->tex.path_so != NULL)
 		free(v->tex.path_so);
-	if (v->tex.path_ea)
+	if (v->tex.path_ea != NULL)
 		free(v->tex.path_ea);
-	if (v->tex.path_we)
+	if (v->tex.path_we != NULL)
 		free(v->tex.path_we);
-	if (v)
+	if (v != NULL)
 		free(v);
 }
 

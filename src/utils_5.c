@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 20:49:41 by moninechan        #+#    #+#             */
-/*   Updated: 2023/01/01 01:41:51 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/01/01 19:54:21 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ int	is_allowed_space_x(t_prg *v, int i, int j, int sens)
 	while (v->map[i][j] && v->map[i][j] == 32)
 	{
 		if (sens == 1)
+		{
 			i++;
+			if (v->map[i] == NULL)
+				return (0);
+		}
 		else
 			i--;
 		if (is_allowed_char(v->map[i][j]))
