@@ -24,4 +24,4 @@ Run the Makefile:<br>
 The arguments that the cub3D program is the path to the map and textures file (.cub file) to load the program.
 Maps are stored in the folder `maps`. <br>
 To run the program :<br>
-`./cub3D ./maps/test00_valid.cub`
+`./cub3D ./maps/test01_valid.cub`
